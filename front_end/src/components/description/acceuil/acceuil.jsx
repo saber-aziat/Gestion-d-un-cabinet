@@ -1,6 +1,10 @@
+import Menu from "../menu/menu";
 import styles from "./acceuil.module.css";
+import { useNavigate } from "react-router-dom";
+import Footer from "../footer/footer";
 
 function Accueil() {
+  const navigate = useNavigate();
 
   // Data for Specialties
   const specialities = [
@@ -16,83 +20,98 @@ function Accueil() {
 
   // Data for Doctors
   const doctors = [
-    {
-      name: "Dr. Marie Dupont",
-      specialty: "Cardiologue",
-      exp: "15 ans d'expérience",
-      location: "Paris 8ème",
-      rating: "4.9",
-      reviews: "127",
-      available: true,
-      image: "https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg"
-    },
-    {
-      name: "Dr. Jean Martin",
-      specialty: "Neurologue",
-      exp: "12 ans d'expérience",
-      location: "Paris 16ème",
-      rating: "4.8",
-      reviews: "98",
-      available: true,
-      image: "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg"
-    },
-    {
-      name: "Dr. Sophie Bernard",
-      specialty: "Dermatologue",
-      exp: "10 ans d'expérience",
-      location: "Paris 6ème",
-      rating: "4.9",
-      reviews: "156",
-      available: false,
-      image: "https://img.freepik.com/free-photo/portrait-smiling-medical-worker-girl-doctor-white-coat-stethoscope-pointing-fingers-le_1258-88166.jpg"
-    },
-    {
-      name: "Dr. Pierre Leroy",
-      specialty: "Pédiatre",
-      exp: "8 ans d'expérience",
-      location: "Paris 11ème",
-      rating: "4.7",
-      reviews: "89",
-      available: true,
-      image: "https://img.freepik.com/free-photo/hospital-healthcare-workers-covid-19-treatment-concept-young-doctor-scrubs-making-daily-errands-clinic-listening-patient-symptoms-look-camera-professional-physician-cure-diseases_1258-57233.jpg"
-    },
-  ];
+  {
+    name: "Dr. Ahmed El Amrani",
+    specialty: "Cardiologue",
+    exp: "15 ans d'expérience",
+    location: "DencoferHealth – Meknès",
+    rating: "4.9",
+    reviews: "127",
+    available: true,
+    image: "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg"
+  },
+  {
+    name: "Dr. Youssef Benali",
+    specialty: "Neurologue",
+    exp: "12 ans d'expérience",
+    location: "DencoferHealth – Meknès",
+    rating: "4.8",
+    reviews: "98",
+    available: true,
+    image: "https://img.freepik.com/free-photo/hospital-healthcare-workers-covid-19-treatment-concept-young-doctor-scrubs-making-daily-errands-clinic-listening-patient-symptoms-look-camera-professional-physician-cure-diseases_1258-57233.jpg"
+  },
+  {
+    name: "Dr. Sara Alami",
+    specialty: "Dermatologue",
+    exp: "10 ans d'expérience",
+    location: "DencoferHealth – Meknès",
+    rating: "4.9",
+    reviews: "156",
+    available: false,
+    image: "https://img.freepik.com/free-photo/portrait-smiling-medical-worker-girl-doctor-white-coat-stethoscope-pointing-fingers-le_1258-88166.jpg"
+  },
+  {
+    name: "Dr. Omar Chraibi",
+    specialty: "Pédiatre",
+    exp: "8 ans d'expérience",
+    location: "DencoferHealth – Meknès",
+    rating: "4.7",
+    reviews: "89",
+    available: true,
+    image: "https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg"
+  },
+];
+
 
   // Data for Features
   const features = [
-    {
-      title: "Réservation en ligne",
-      description: "Prenez rendez-vous 24h/24 avec le médecin de votre choix en quelques clics.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="16" y1="2" x2="16" y2="6"></line>
-          <line x1="8" y1="2" x2="8" y2="6"></line>
-          <line x1="3" y1="10" x2="21" y2="10"></line>
-        </svg>
-      )
-    },
-    {
-      title: "Messagerie sécurisée",
-      description: "Échangez directement avec votre médecin via notre système de messagerie chiffrée.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-        </svg>
-      )
-    },
-    {
-      title: "Données protégées",
-      description: "Vos informations médicales sont sécurisées et conformes aux normes RGPD.",
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-        </svg>
-      )
-    }
-  ];
+  {
+    title: "Réservation en ligne",
+    description: "Prenez rendez-vous 24h/24 avec le médecin de votre choix en quelques clics.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+    )
+  },
+  {
+    title: "Messagerie sécurisée",
+    description: "Échangez directement avec votre médecin via notre système de messagerie chiffrée.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+      </svg>
+    )
+  },
+  {
+    title: "Données protégées",
+    description: "Vos informations médicales sont sécurisées et conformes aux normes RGPD.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+    )
+  },
+  {
+    title: "Suivi médical personnalisé",
+    description: "Accédez à votre historique médical, vos rendez-vous et recommandations des médecins DencoferHealth.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 3h18v18H3z"></path>
+        <path d="M9 12h6"></path>
+        <path d="M12 9v6"></path>
+      </svg>
+    )
+  }
+];
+
 
   return (
+    <>
+    <Menu />
     <div className={styles.container}>
 
       {/* 1. Hero Section */}
@@ -113,7 +132,7 @@ function Accueil() {
             d'un suivi personnalisé.
           </p>
           <div className={styles.heroButtons}>
-            <button className={styles.primaryBtn}>
+            <button className={styles.primaryBtn} onClick={() => navigate("/login")}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -127,7 +146,7 @@ function Accueil() {
 
           <div className={styles.heroStats}>
             <div className={styles.statItem}>
-              <span className={styles.statNumber}>50+</span>
+              <span className={styles.statNumber}>5+</span>
               <span className={styles.statLabel}>Médecins</span>
             </div>
             <div className={styles.statItem}>
@@ -178,7 +197,7 @@ function Accueil() {
             <span className={styles.pill}>Notre Équipe</span>
             <h2 className={styles.sectionTitle}>Médecins recommandés</h2>
           </div>
-          <button className={styles.viewAllBtn}>Voir tous les médecins →</button>
+          <button className={styles.viewAllBtn} onClick={() => navigate("/login")}>Voir tous les médecins →</button>
         </div>
 
         <div className={styles.gridSystem}>
@@ -243,6 +262,8 @@ function Accueil() {
       </section>
 
     </div>
+    <Footer />
+    </>
   );
 }
 

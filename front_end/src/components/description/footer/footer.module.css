@@ -1,0 +1,254 @@
+.footer {
+    background: linear-gradient(135deg, #0f5f7f 0%, #1a7ba8 100%);
+    color: white;
+    padding: 60px 0 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+.footerContent {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+/* Company Info Section */
+.footerSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.logoSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.logoIcon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.companyName {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: white;
+}
+
+.companyTagline {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.companyDescription {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.socialLinks {
+    display: flex;
+    gap: 12px;
+}
+
+.socialLink {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.socialLink:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* Links Section */
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    color: white;
+}
+
+.linkList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footerLink {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footerLink:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+/* Contact Section */
+.contactList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contactItem {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contactIcon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: white;
+}
+
+/* Footer Bottom */
+.footerBottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.copyright {
+    font-size: 14px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.bottomLinks {
+    display: flex;
+    gap: 24px;
+}
+
+.bottomLink {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.bottomLink:hover {
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .footerContent {
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+    }
+
+    .footerContent .footerSection:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 900px) {
+    .footerContent {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding: 0 30px;
+    }
+
+    .footerContent .footerSection:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .footerBottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 24px 30px;
+    }
+
+    .bottomLinks {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 40px 0 0;
+    }
+
+    .footerContent {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 20px;
+    }
+
+    .footerContent .footerSection:first-child {
+        grid-column: 1;
+    }
+
+    .logoSection {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .socialLinks {
+        flex-wrap: wrap;
+    }
+
+    .footerBottom {
+        padding: 20px;
+    }
+
+    .copyright {
+        font-size: 13px;
+    }
+
+    .bottomLink {
+        font-size: 13px;
+    }
+
+    .sectionTitle {
+        font-size: 16px;
+    }
+
+    .footerLink,
+    .contactItem {
+        font-size: 14px;
+    }
+}

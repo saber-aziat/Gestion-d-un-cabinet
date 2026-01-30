@@ -1,0 +1,242 @@
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Filter Section */
+.filterWrapper {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding: 1rem 0 2rem 0;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.filterWrapper::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+}
+
+.filterBtn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    border: none;
+    background: #f0f7fa;
+    color: #1a6393;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.filterBtn:hover {
+    background: #e1f0f7;
+}
+
+.activeFilter {
+    background: #1a6393 !important;
+    color: white !important;
+    box-shadow: 0 6px 15px rgba(26, 99, 147, 0.3);
+}
+
+/* Doctors Grid */
+.doctorsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 1rem;
+}
+
+/* Doctor Card */
+.card {
+    background: white;
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.imageSection {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #f8fafc;
+    margin-bottom: 1.5rem;
+}
+
+.doctorImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .doctorImg {
+    transform: scale(1.05);
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #10b981;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+}
+
+.rating {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(4px);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+}
+
+.star {
+    color: #fbbf24;
+}
+
+.infoSection {
+    flex-grow: 1;
+}
+
+.doctorName {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.4rem;
+}
+
+.specialty {
+    color: #1a6393;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.detailItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.btnGroup {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.followBtn {
+    flex: 1;
+    background: transparent;
+    border: 2px solid #1a6393;
+    color: #1a6393;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.followIcon {
+    font-size: 1.1rem;
+}
+
+.followBtn:hover {
+    background: #f0f7fa;
+}
+
+.followed {
+    background: #1a6393;
+    color: white;
+}
+
+.appointmentBtn {
+    flex: 2;
+    background: #1a6393;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.appointmentBtn:hover {
+    background: #145076;
+}
+
+.loadingWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 0;
+    color: #6b7280;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1a6393;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 640px) {
+    .doctorsGrid {
+        grid-template-columns: 1fr;
+    }
+}

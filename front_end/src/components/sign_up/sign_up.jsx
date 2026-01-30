@@ -83,47 +83,46 @@ const SignUp = () => {
     setLoading(true);
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('firstName', formData.firstName);
-      formDataToSend.append('lastName', formData.lastName);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
-      formDataToSend.append('password', formData.password);
-      if (formData.photo) {
-        formDataToSend.append('photo', formData.photo);
-      }
+  const formDataToSend = new FormData();
+  formDataToSend.append('firstName', formData.firstName);
+  formDataToSend.append('lastName', formData.lastName);
+  formDataToSend.append('email', formData.email);
+  formDataToSend.append('phone', formData.phone);
+  formDataToSend.append('password', formData.password);
+  if (formData.photo) {
+    formDataToSend.append('photo', formData.photo);
+  }
 
-      const response = await fetch('http://localhost:8000/api/signup', {
-        method: 'POST',
-        body: formDataToSend,
-      });
+  const response = await fetch('http://localhost:8000/api/signup/', {
+    method: 'POST',
+    body: formDataToSend,
+  });
 
-      const data = await response.json();
+  const data = await response.json();
 
-      if (response.ok) {
-        console.log(data);
-        // Reset form
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          password: ''
-        });
-        // Redirect to login or home page after 2 seconds
-        setTimeout(() => {
-          window.location.href = '/login';
-        }, 2000);
-      } else {
-        // Handle server errors
-        setErrors({ submit: data.message || 'Une erreur est survenue' });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      setErrors({ submit: 'Erreur de connexion au serveur' });
-    } finally {
-      setLoading(false);
-    }
+  if (response.ok) {
+    console.log(data);  // tu verras photo_url ici
+    setFormData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      password: '',
+      photo: null
+    });
+    setTimeout(() => {
+      window.location.href = '/login';
+    }, 2000);
+  } else {
+    setErrors({ submit: data.message || data.error || 'Une erreur est survenue' });
+  }
+} catch (error) {
+  console.error('Error:', error);
+  setErrors({ submit: 'Erreur de connexion au serveur' });
+} finally {
+  setLoading(false);
+}
+
   };
 
   return (

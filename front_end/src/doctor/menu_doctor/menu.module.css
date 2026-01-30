@@ -1,0 +1,175 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 4rem;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26, 99, 147, 0.1);
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.logoSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.logoIcon {
+    background: linear-gradient(135deg, #0d4a7a 0%, #1a6393 100%);
+    /* Slightly different gradient for doctor */
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(13, 74, 122, 0.25);
+}
+
+.logoTextContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.logoTitle {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #0d4a7a;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.logoSubtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navLinks {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.link {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.link:hover {
+    color: #0d4a7a;
+}
+
+.active {
+    color: #0d4a7a;
+    font-weight: 600;
+}
+
+.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 20px;
+    height: 3px;
+    background: #0d4a7a;
+    border-radius: 10px;
+    transform: translateX(-50%);
+    animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 20px;
+        opacity: 1;
+    }
+}
+
+.profileSection {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    border-radius: 50px;
+    background: rgba(13, 74, 122, 0.05);
+    border: 1px solid rgba(13, 74, 122, 0.1);
+    transition: all 0.2s ease;
+}
+
+.userInfo:hover {
+    background: rgba(13, 74, 122, 0.08);
+}
+
+.userName {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.9rem;
+}
+
+.userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logoutBtn {
+    background: transparent;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.logoutBtn:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 1024px) {
+    .header {
+        padding: 0.8rem 2rem;
+    }
+
+    .navLinks {
+        gap: 1.5rem;
+    }
+}

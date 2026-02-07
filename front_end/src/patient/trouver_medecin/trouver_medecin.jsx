@@ -42,6 +42,7 @@ const TrouverMedecin = () => {
 
             const response = await fetch(url);
             const data = await response.json();
+            console.log("📋 Docteurs reçus de l'API:", data);
             setDoctors(data);
         } catch (error) {
             console.error('Error fetching doctors:', error);
@@ -57,6 +58,8 @@ const TrouverMedecin = () => {
     };
 
     const handleFollow = async (doctorId) => {
+         console.log('User:', user.id);  // ⚠️ Ajoutez ceci
+         console.log('Doctor ID:', doctorId);  // ⚠️ Et ceci
         try {
             const response = await fetch('http://localhost:8000/api/follow/', {
                 method: 'POST',
@@ -109,7 +112,7 @@ const TrouverMedecin = () => {
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.3 }}
-                                key={doc.id}
+                                key={doc.user_id}
                                 className={styles.card}
                             >
                                 <div className={styles.imageSection}>
@@ -142,11 +145,11 @@ const TrouverMedecin = () => {
 
                                     <div className={styles.btnGroup}>
                                         <button
-                                            className={`${styles.followBtn} ${following[doc.id] ? styles.followed : ''}`}
-                                            onClick={() => handleFollow(doc.id)}
+                                            className={`${styles.followBtn} ${following[doc.user_id] ? styles.followed : ''}`}
+                                            onClick={() => handleFollow(doc.user_id)}
                                         >
-                                            {following[doc.id] ? <Check size={18} /> : <UserPlus size={18} />}
-                                            {following[doc.id] ? 'Suivi' : 'Suivre +'}
+                                            {following[doc.user_id] ? <Check size={18} /> : <UserPlus size={18} />}
+                                            {following[doc.user_id] ? 'Suivi' : 'Suivre +'}
                                         </button>
                                         <button className={styles.appointmentBtn}>
                                             Prendre RDV

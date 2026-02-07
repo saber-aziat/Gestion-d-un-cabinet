@@ -77,7 +77,7 @@ const PatientMenu = () => {
           Trouver un médecin
         </NavLink>
         <NavLink
-          to="/patient/prendre-rdv"
+          to="/patient/gerer-rdv"
           className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
         >
           <Calendar size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />

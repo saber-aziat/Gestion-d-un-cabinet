@@ -49,7 +49,8 @@ const Messagee = () => {
         setLoading(true);
         try {
             // First, get doctors the patient is following (status: accepting)
-            const followRes = await fetch(`http://localhost:8000/api/patient/follows/?patient_id=${user.id}`);
+            const followRes = await fetch(`http://localhost:8000/api/doctor/`);
+            console.log('Follow API response:', followRes);
             const followedDoctors = await followRes.json();
 
             // Map them to conversation objects
@@ -79,7 +80,8 @@ const Messagee = () => {
     const fetchMessages = async (doctorId) => {
         setMessagesLoading(true);
         try {
-            const response = await fetch(`http://localhost:8000/api/message/?with_user=${doctorId}&doctor_id=${user.id}`);
+            const response = await fetch(`http://localhost:8000/api/messagge/?with_user=${user.id}&doctor_id=${doctorId}`);
+            console.log('user id ', user.id, 'doctor id ', doctorId)
             if (!response.ok) throw new Error('Failed to fetch messages');
             const data = await response.json();
             setMessages(data);
@@ -147,17 +149,8 @@ const Messagee = () => {
             {/* Left Sidebar */}
             <aside className={styles.sidebar}>
                 <div className={styles.sidebarHeader}>
-                    <h1 className={styles.sidebarTitle}>Messages</h1>
-                    <div className={styles.searchWrapper}>
-                        <Search className={styles.searchIcon} size={18} />
-                        <input
-                            type="text"
-                            className={styles.searchInput}
-                            placeholder="Rechercher un médecin..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                    </div>
+                    <h1 className={styles.sidebarTitle}>Message Avec Dr . Ilyes</h1>
+
                 </div>
 
                 <div className={styles.conversationList}>
@@ -204,7 +197,7 @@ const Messagee = () => {
                                 <img src={getPhotoUrl(selectedConv.photo)} alt={selectedConv.name} className={styles.headerAvatar} />
                                 <div>
                                     <h2 className={styles.headerName}>{selectedConv.name}</h2>
-                                    <span className={styles.headerStatus}>En ligne</span>
+                                    <span className={styles.headerStatus}>Disponible</span>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '1rem', color: '#64748b' }}>
@@ -224,15 +217,32 @@ const Messagee = () => {
                                         <div
                                             key={msg.id}
                                             className={`${styles.messageRow} ${isMe ? styles.myMessageRow : styles.doctorMessageRow}`}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'flex-end',
+                                                gap: '8px',
+                                                flexDirection: isMe ? 'row-reverse' : 'row',
+                                                justifyContent: 'flex-start'
+                                            }}
                                         >
+                                            <img
+                                                src={getPhotoUrl(isMe ? user.photo : selectedConv.photo)}
+                                                alt="Avatar"
+                                                style={{ width: '30px', height: '30px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                                            />
                                             <motion.div
                                                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                                 className={`${styles.messageBubble} ${isMe ? styles.myBubble : styles.doctorBubble}`}
                                             >
-                                                {msg.text}
+                                                {msg.content}
                                                 <span className={styles.messageTime}>
-                                                    {msg.created_at} {isMe && <CheckCheck size={12} style={{ display: 'inline', marginLeft: '4px' }} />}
+                                                    {/* ✅ Formatter la date pour afficher seulement HH:MM */}
+                                                    {new Date(msg.created_at).toLocaleTimeString('fr-FR', {
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    })}
+                                                    {isMe && <CheckCheck size={12} style={{ display: 'inline', marginLeft: '4px' }} />}
                                                 </span>
                                             </motion.div>
                                         </div>

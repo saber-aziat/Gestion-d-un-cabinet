@@ -39,7 +39,7 @@ const Email = () => {
         setLoading(true);
         try {
             // Using the same endpoint as message.jsx to get patients
-            const response = await fetch(`http://localhost:8000/api/follow/?doctor_id=${user.id}&status=accepted`);
+            const response = await fetch(`http://localhost:8000/api/patient/`);
             if (!response.ok) throw new Error('Failed to fetch patients');
             const data = await response.json();
 

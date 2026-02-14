@@ -49,7 +49,7 @@ const Message = () => {
         setLoading(true);
         try {
             // Appelle l'API pour récupérer les patients acceptés
-            const followRes = await fetch(`http://localhost:8000/api/follows/?doctor_id=${user.id}&status=accepted`);
+            const followRes = await fetch(`http://localhost:8000/api/patient/`);
             const followedPatients = await followRes.json();
 
             // Transforme chaque patient en objet conversation
@@ -83,7 +83,6 @@ const Message = () => {
             const response = await fetch(`http://localhost:8000/api/message/?with_user=${patientId}&doctor_id=${user.id}`);
             if (!response.ok) throw new Error('Failed to fetch messages');
             const data = await response.json();
-            console.log("📦 Messages reçus:", data);
             setMessages(data);
         } catch (error) {
             console.error('Error fetching messages:', error);
@@ -201,7 +200,7 @@ const Message = () => {
                                 <img src={getPhotoUrl(selectedConv.photo)} alt={selectedConv.name} className={styles.headerAvatar} />
                                 <div>
                                     <h2 className={styles.headerName}>{selectedConv.name}</h2>
-                                    <span className={styles.headerStatus}>En ligne</span>
+                                    <span className={styles.headerStatus}>Disponible</span>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', gap: '1rem', color: '#64748b' }}>
@@ -221,15 +220,32 @@ const Message = () => {
                                         <div
                                             key={msg.id}
                                             className={`${styles.messageRow} ${isMe ? styles.myMessageRow : styles.patientMessageRow}`}
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'flex-end',
+                                                gap: '8px',
+                                                flexDirection: isMe ? 'row-reverse' : 'row',
+                                                justifyContent: 'flex-start' // Override CSS justify-content to match flow direction
+                                            }}
                                         >
+                                            <img
+                                                src={getPhotoUrl(isMe ? user.photo : selectedConv.photo)}
+                                                alt="Avatar"
+                                                style={{ width: '30px', height: '30px', borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                                            />
                                             <motion.div
                                                 initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                                 animate={{ opacity: 1, y: 0, scale: 1 }}
                                                 className={`${styles.messageBubble} ${isMe ? styles.myBubble : styles.patientBubble}`}
                                             >
-                                                {msg.text}
+                                                {msg.content}
                                                 <span className={styles.messageTime}>
-                                                    {msg.created_at} {isMe && <CheckCheck size={12} style={{ display: 'inline', marginLeft: '4px' }} />}
+                                                    {/* ✅ Formatter la date pour afficher seulement HH:MM */}
+                                                    {new Date(msg.created_at).toLocaleTimeString('fr-FR', {
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    })}
+                                                    {isMe && <CheckCheck size={12} style={{ display: 'inline', marginLeft: '4px' }} />}
                                                 </span>
                                             </motion.div>
                                         </div>

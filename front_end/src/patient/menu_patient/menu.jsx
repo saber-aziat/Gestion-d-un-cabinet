@@ -4,10 +4,10 @@ import { AuthContext } from '../../context/AuthContext';
 import { motion } from 'framer-motion';
 import styles from './menu.module.css';
 import {
-  Home, Search, Calendar, MessageSquare, History, LogOut, Heart, Bell, User
+  Home, Search, Calendar, MessageSquare, History, LogOut, Heart, Bell, User, FileText
 } from 'lucide-react';
 
-console.log(motion)
+
 
 
 const PatientMenu = () => {
@@ -16,11 +16,10 @@ const PatientMenu = () => {
 
   // Debug : affichez les données utilisateur
   useEffect(() => {
-    console.log('PatientMenu - Current user:', user);
   }, [user]);
 
   if (!user) {
-    console.log('PatientMenu - No user, redirecting to login');
+    
     return <Navigate to="/login" />;
   }
 
@@ -92,11 +91,11 @@ const PatientMenu = () => {
           Notification
         </NavLink>
         <NavLink
-          to="/patient/profil"
+          to="/patient/bilans"
           className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
         >
-          <User size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-          Profil
+          <FileText size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+          Bilans
         </NavLink>
       </nav>
 

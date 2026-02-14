@@ -24,7 +24,7 @@ const Patient = () => {
         try {
             // Standard approach: fetch followed patients for the doctor
             // We filter for 'accepting' status as these are the doctor's active patients
-            const response = await fetch(`http://localhost:8000/api/follows/?doctor_id=${user.id}`);
+            const response = await fetch(`http://localhost:8000/api/patient/`);
             if (!response.ok) throw new Error('Failed to fetch patients');
 
             const data = await response.json();
@@ -43,7 +43,7 @@ const Patient = () => {
 
         setActionLoading(prev => ({ ...prev, [requestId]: true }));
         try {
-            const response = await fetch(`http://localhost:8000/api/follows/${requestId}/`, {
+            const response = await fetch(`http://localhost:8000/api/patient/${requestId}/`, {
                 method: 'DELETE',
             });
 

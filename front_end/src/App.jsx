@@ -37,7 +37,7 @@ function App() {
               <Route path="patients" element={<Patient />} />
               <Route path="messages" element={<DoctorMessage />} />
               <Route path="gerer-rdv" element={<DoctorRDV />} />
-              <Route path="envoyer-mail" element={<Email />} />
+              <Route path="email" element={<Email />} />
 
 
               {/* Other doctor routes will go here */}

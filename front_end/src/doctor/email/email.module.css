@@ -85,14 +85,13 @@
 }
 
 .searchInput {
-    width: 100%;
-    padding: 1rem 1rem 1rem 3.5rem;
+    padding: 1rem 1.25rem;
     border-radius: 16px;
     border: 1.5px solid #e2e8f0;
     background: #f8fafc;
     font-size: 1rem;
-    transition: all 0.3s ease;
     outline: none;
+    transition: all 0.3s ease;
 }
 
 .searchInput:focus {

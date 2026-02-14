@@ -33,7 +33,7 @@ const PatientRDV = () => {
     const fetchDoctors = async () => {
         try {
             // Fetch doctors the patient follows
-            const res = await fetch(`http://localhost:8000/api/follow/?patient_id=${user.id}&status=accepting`);
+            const res = await fetch(`http://localhost:8000/api/doctor/`);
             const data = await res.json();
             setDoctors(data);
             if (data.length > 0) setSelectedDoctor(data[0]);
@@ -61,14 +61,6 @@ const PatientRDV = () => {
         return day === 0 ? 6 : day - 1; // Adjust for Monday start
     };
 
-    const handlePrevMonth = () => {
-        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
-    };
-
-    const handleNextMonth = () => {
-        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 1));
-    };
-
     const handleYearChange = (e) => {
         setViewDate(new Date(parseInt(e.target.value), viewDate.getMonth(), 1));
     };
@@ -93,17 +85,21 @@ const PatientRDV = () => {
     });
 
     const isSlotBooked = (date, hour) => {
-        const dateStr = date.toISOString().split('T')[0];
-        const timeStr = `${hour.toString().padStart(2, '0')}:00`;
-        return rdvs.find(r => r.rdv_date === dateStr && r.rdv_time.startsWith(timeStr));
-    };
+    const dateStr = date.toISOString().split('T')[0];
+    const timeStr = `${hour.toString().padStart(2, '0')}:00`;
+    
+    // ✅ Utiliser appointment_date et appointment_time
+    return rdvs.find(r => 
+        r.appointment_date === dateStr && 
+        r.appointment_time.startsWith(timeStr)
+    );
+};
 
     const handleSlotClick = (date, hour) => {
         const booked = isSlotBooked(date, hour);
-        if (booked) {
-            if (booked.status === 'accepted') return; // Cannot click accepted slots
-            if (booked.patient_id === user.id) return; // Already requested by me
-        }
+
+        // Prevent clicking on ANY booked slot (Accepted, My Pending, Other's Pending)
+        if (booked) return;
 
         setPendingSlot({ date, hour });
         setShowModal(true);
@@ -114,7 +110,7 @@ const PatientRDV = () => {
         setLoading(true);
         const doctorId = selectedDoctor.doctor_id || selectedDoctor.user_id;
         try {
-            const res = await fetch('http://localhost:8000/api/rdv/', {
+            const res = await fetch('http://localhost:8000/api/rdvv/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -151,7 +147,7 @@ const PatientRDV = () => {
                 <aside>
                     <div className={styles.calendarCard}>
                         <div className={styles.doctorSelector}>
-                            <label>Choisir un médecin</label>
+                            <label>Choisir une Date</label>
                             <div className={styles.doctorList}>
                                 {doctors.map(doc => (
                                     <div
@@ -219,12 +215,19 @@ const PatientRDV = () => {
                                     let content = null;
 
                                     if (booked) {
-                                        if (booked.status === 'accepted') {
+                                        // If it's my own appointment
+                                        if (booked.patient_id === user.id) {
+                                            if (booked.status === 'accepted') {
+                                                slotClass += ` ${styles.bookedSlot}`;
+                                                content = <span className={styles.statusTag} style={{ color: '#065f46', background: '#d1fae5' }}>Validé</span>;
+                                            } else {
+                                                slotClass += ` ${styles.pendingSlot}`;
+                                                content = <span className={`${styles.statusTag} ${styles.statusPending}`}>En attente</span>;
+                                            }
+                                        } else {
+                                            // Booked by someone else (Pending or Accepted) -> Block it
                                             slotClass += ` ${styles.bookedSlot}`;
                                             content = <span className={styles.statusTag}>Occupé</span>;
-                                        } else if (booked.patient_id === user.id) {
-                                            slotClass += ` ${styles.pendingSlot}`;
-                                            content = <span className={`${styles.statusTag} ${styles.statusPending}`}>En attente</span>;
                                         }
                                     }
 

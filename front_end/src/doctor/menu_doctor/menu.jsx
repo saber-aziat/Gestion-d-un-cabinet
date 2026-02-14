@@ -13,10 +13,11 @@ import {
     LogOut,
     Heart,
     FileText,
-    Bell
+    Bell,
+    BarChart2
 } from 'lucide-react';
 
-console.log(motion)
+
 const DoctorMenu = () => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -103,11 +104,11 @@ const DoctorMenu = () => {
                     Bilan
                 </NavLink>
                 <NavLink
-                    to="/doctor/notifications"
+                    to="/doctor/statistics"
                     className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
                 >
-                    <Bell size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-                    Notification
+                    <BarChart2 size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+                    Statistic
                 </NavLink>
             </nav>
 

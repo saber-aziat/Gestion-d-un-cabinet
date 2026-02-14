@@ -16,42 +16,22 @@ const Description = () => {
         phone: "+212 7 11 92 98 85"
     };
 
-    const floors = [
-        {
-            level: 1,
-            title: "Accueil & Administration",
-            description: "Notre premier étage est dédié à l'accueil chaleureux de nos patients. Vous y trouverez les guichets d'inscription, la salle d'attente principale et les services administratifs pour vos dossiers médicaux.",
-            image: "/photo1.avif"
-        },
-        {
-            level: 2,
-            title: "Médecine Générale & Pédiatrie",
-            description: "Le deuxième étage regroupe nos médecins généralistes expérimentés et un service de pédiatrie spécialement aménagé pour le confort des enfants.",
-            image: "/photo2.avif"
-        },
-        {
-            level: 3,
-            title: "Spécialités Chirurgicales",
-            description: "Cet étage abrite nos consultations spécialisées en chirurgie, cardiologie et neurologie, avec des équipements de diagnostic de pointe.",
-            image: "/photo3.avif"
-        },
-        {
-            level: 4,
-            title: "Laboratoire & Imagerie",
-            description: "Equipé des dernières technologies, le quatrième étage est réservé aux analyses biologiques, radiographies, scanners et IRM.",
-            image: "/photo3.avif"
-        },
-        {
-            level: 5,
-            title: "Bloc Opératoire & Récupération",
-            description: "Le dernier étage assure une sécurité maximale avec nos blocs opératoires stériles et une unité de soins post-opératoires pour une récupération optimale.",
-            image: "/photo4.avif"
-        }
-    ];
+    const doctorInfo = {
+        name: "Dr. Ilyes",
+        specialty: "Médecin Généraliste & Spécialiste",
+        email: "ilyes.doctor@dencofer.com",
+        bio: "Diplômé de la Faculté de Médecine avec mention très bien, Dr. Ilyes possède plus de 15 ans d'expérience dans le diagnostic et le traitement des maladies chroniques et aiguës.",
+        highlights: [
+            { title: "Expertise", desc: "Spécialisé en médecine interne et chirurgie mineure." },
+            { title: "Engagement", desc: "Écoute attentive et soins personnalisés à chaque consultation." },
+            { title: "Horaires", desc: "Lundi au Samedi de 8h30 à 18h00." }
+        ],
+        image: "/ilyes.avif"
+    };
 
     return (
         <div className={styles.container}>
-            {/* Hero Section */}
+            {/* Hero Section - Cabinet Info */}
             <motion.section
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -96,11 +76,17 @@ const Description = () => {
                                 <span>{cabinetInfo.email}</span>
                             </div>
                         </div>
+                        <div className={styles.infoItem}>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoLabel}>Téléphone :</span>
+                                <span>{cabinetInfo.phone}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </motion.section>
 
-            {/* Floors Section */}
+            {/* Doctor Info Section (Scroll) */}
             <section className={styles.floorsSection}>
                 <motion.h2
                     initial={{ opacity: 0 }}
@@ -108,28 +94,68 @@ const Description = () => {
                     viewport={{ once: true }}
                     className={styles.sectionTitle}
                 >
-                    Structure de notre Cabinet
+                    Notre Médecin Principal
                 </motion.h2>
 
-                {floors.map((floor, index) => (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', maxWidth: '1000px', margin: '0 auto' }}>
+
+                    {/* Main Doctor Profile Card */}
                     <motion.div
-                        key={floor.level}
-                        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
                         className={styles.floorCard}
+                        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '2rem' }}
                     >
-                        <div className={styles.floorImageWrapper}>
-                            <img src={floor.image} alt={floor.title} className={styles.floorImage} />
+                        <div className={styles.floorImageWrapper} style={{ flex: '0 0 300px' }}>
+                            <img
+                                src={doctorInfo.image}
+                                alt={doctorInfo.name}
+                                className={styles.floorImage}
+                                style={{ objectFit: 'cover', height: '100%' }}
+                            />
                         </div>
-                        <div className={styles.floorContent}>
-                            <span className={styles.floorNumber}>Etage {floor.level}</span>
-                            <h3 className={floor.title}>{floor.title}</h3>
-                            <p className={styles.floorDesc}>{floor.description}</p>
+                        <div className={styles.floorContent} style={{ flex: 1 }}>
+                            <h3 className={styles.floorTitle || 'floorTitle'} style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>{doctorInfo.name}</h3>
+                            <span style={{ color: '#0f5f7f', fontWeight: 'bold', fontSize: '1.2rem', display: 'block', marginBottom: '1rem' }}>
+                                {doctorInfo.specialty}
+                            </span>
+                            <p className={styles.floorDesc} style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+                                {doctorInfo.bio}
+                            </p>
+                            <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #eee' }}>
+                                <span style={{ display: 'block', marginBottom: '0.5rem' }}><strong>Email:</strong> {doctorInfo.email}</span>
+                            </div>
                         </div>
                     </motion.div>
-                ))}
+
+                    {/* Highlights Grid */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+                        {doctorInfo.highlights.map((item, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.2 }}
+                                style={{
+                                    background: 'white',
+                                    padding: '2rem',
+                                    borderRadius: '16px',
+                                    boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: '1rem'
+                                }}
+                            >
+                                <h4 style={{ color: '#0f5f7f', fontSize: '1.3rem', margin: 0 }}>{item.title}</h4>
+                                <p style={{ color: '#666', lineHeight: '1.5', margin: 0 }}>{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                </div>
             </section>
         </div>
     );

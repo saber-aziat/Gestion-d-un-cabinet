@@ -4,10 +4,10 @@ import { AuthContext } from '../../context/AuthContext';
 import { motion } from 'framer-motion';
 import styles from './menu.module.css';
 import {
-  Home, Search, Calendar, MessageSquare, History, LogOut, Heart
+  Home, Search, Calendar, MessageSquare, History, LogOut, Heart, Bell, User
 } from 'lucide-react';
 
-console.log(motion )
+console.log(motion)
 
 
 const PatientMenu = () => {
@@ -64,20 +64,14 @@ const PatientMenu = () => {
       <nav className={styles.navLinks}>
         <NavLink
           to="/patient"
+          end
           className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
         >
           <Home size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
           Accueil
         </NavLink>
         <NavLink
-          to="/patient/trouver-medecin"
-          className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-        >
-          <Search size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-          Trouver un médecin
-        </NavLink>
-        <NavLink
-          to="/patient/gerer-rdv"
+          to="/patient/gerer_rdv"
           className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
         >
           <Calendar size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
@@ -91,11 +85,18 @@ const PatientMenu = () => {
           Messages
         </NavLink>
         <NavLink
-          to="/patient/historique"
+          to="/patient/notifications"
           className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
         >
-          <History size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-          Historique
+          <Bell size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+          Notification
+        </NavLink>
+        <NavLink
+          to="/patient/profil"
+          className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+        >
+          <User size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+          Profil
         </NavLink>
       </nav>
 
@@ -104,8 +105,8 @@ const PatientMenu = () => {
         <div className={styles.userInfo}>
           <span className={styles.userName}>
             {/* CORRIGÉ : utilisez first_name et last_name au lieu de firstName et lastName */}
-            {user.first_name && user.last_name 
-              ? `${user.first_name} ${user.last_name}` 
+            {user.first_name && user.last_name
+              ? `${user.first_name} ${user.last_name}`
               : user.email || 'Patient'}
           </span>
           <img

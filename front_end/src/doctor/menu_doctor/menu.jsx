@@ -11,7 +11,9 @@ import {
     MessageSquare,
     History,
     LogOut,
-    Heart
+    Heart,
+    FileText,
+    Bell
 } from 'lucide-react';
 
 console.log(motion)
@@ -24,6 +26,7 @@ const DoctorMenu = () => {
     }
 
     const handleLogout = () => {
+        // Vider le contexte (supprimer les données utilisateur)
         logout();
         navigate('/');
     };
@@ -72,13 +75,6 @@ const DoctorMenu = () => {
                     Gérer RDV
                 </NavLink>
                 <NavLink
-                    to="/doctor/envoyer-mail"
-                    className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
-                >
-                    <Mail size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-                    Envoyer Mail
-                </NavLink>
-                <NavLink
                     to="/doctor/patients"
                     className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
                 >
@@ -93,11 +89,25 @@ const DoctorMenu = () => {
                     Messages
                 </NavLink>
                 <NavLink
-                    to="/doctor/historique"
+                    to="/doctor/email"
                     className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
                 >
-                    <History size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
-                    Historique
+                    <Mail size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+                    Email
+                </NavLink>
+                <NavLink
+                    to="/doctor/bilans"
+                    className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                >
+                    <FileText size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+                    Bilan
+                </NavLink>
+                <NavLink
+                    to="/doctor/notifications"
+                    className={({ isActive }) => isActive ? `${styles.link} ${styles.active}` : styles.link}
+                >
+                    <Bell size={18} style={{ marginRight: '6px', verticalAlign: 'middle' }} />
+                    Notification
                 </NavLink>
             </nav>
 

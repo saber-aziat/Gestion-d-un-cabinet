@@ -12,8 +12,10 @@ import Patient from "./doctor/patient/patient";
 import DoctorMessage from "./doctor/message/message";
 import PatientMessage from "./patient/message/message";
 import PatientRDV from "./patient/rdv/rdv";
+import PatientBilan from "./patient/bilan/bilan";
 import DoctorRDV from "./doctor/rdv/rdv";
 import Email from "./doctor/email/email";
+import Bilan from "./doctor/bilon/bilan";
 
 
 
@@ -38,6 +40,7 @@ function App() {
               <Route path="messages" element={<DoctorMessage />} />
               <Route path="gerer-rdv" element={<DoctorRDV />} />
               <Route path="email" element={<Email />} />
+              <Route path="bilans" element={<Bilan />} />
 
 
               {/* Other doctor routes will go here */}
@@ -54,6 +57,7 @@ function App() {
               <Route path="messages" element={<PatientMessage />} />
               <Route path="historique" element={<PatientHistorique />} />
               <Route path="gerer_rdv" element={<PatientRDV />} />
+              <Route path="bilans" element={<PatientBilan />} />
               {/* Other patient routes will go here */}
             </Routes>
           </>
